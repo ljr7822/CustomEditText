@@ -3,6 +3,7 @@ package com.example.customedittext
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.EditText
@@ -17,10 +18,23 @@ import androidx.core.content.ContextCompat
 class EditTextWithClear @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : androidx.appcompat.widget.AppCompatEditText(context, attrs, defStyleAttr) {
-
     // 获得清除图标
-    private val iconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_baseline_clear_24)
+    private var iconDrawable : Drawable? = null
 
+    // 获取xml自定义属性
+    init {
+      context.theme.obtainStyledAttributes(attrs, R.styleable.EditTextWithClear, 0, 0)
+          .apply {
+              try {
+                  val iconId = getResourceId(R.styleable.EditTextWithClear_clearIcon, 0)
+                  if (iconId != 0){
+                      iconDrawable = ContextCompat.getDrawable(context,iconId)
+                  }
+              } finally {
+                  recycle()
+              }
+          }
+    }
     // 当文字改变时出现图标
     override fun onTextChanged(
         text: CharSequence?,

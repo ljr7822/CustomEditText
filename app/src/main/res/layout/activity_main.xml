@@ -28,8 +28,10 @@
         android:ems="10"
         android:hint="这是带删除的"
         android:inputType="textPersonName"
+        app:clearIcon="@drawable/ic_baseline_clear_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
